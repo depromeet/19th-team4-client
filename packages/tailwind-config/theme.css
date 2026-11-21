@@ -1,0 +1,34 @@
+/*
+ * 웹(Tailwind v4)과 앱(NativeWind v5)이 공유하는 디자인 토큰
+ * 각 앱의 엔트리 CSS 에서 Tailwind 를 import 한 뒤 이 파일을 import 합니다.
+ *
+ * 예) bg-primary-500, text-gray-900, rounded-card
+ */
+@theme {
+  --color-primary-50: #eef4ff;
+  --color-primary-100: #d9e6ff;
+  --color-primary-200: #bcd3ff;
+  --color-primary-300: #8eb6ff;
+  --color-primary-400: #598dff;
+  --color-primary-500: #3366ff;
+  --color-primary-600: #1f47f5;
+  --color-primary-700: #1735e1;
+  --color-primary-800: #192db6;
+  --color-primary-900: #1a2c8f;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f2f4f6;
+  --color-gray-200: #e5e8eb;
+  --color-gray-300: #d1d6db;
+  --color-gray-400: #b0b8c1;
+  --color-gray-500: #8b95a1;
+  --color-gray-600: #6b7684;
+  --color-gray-700: #4e5968;
+  --color-gray-800: #333d4b;
+  --color-gray-900: #191f28;
+
+  --color-danger: #f04452;
+  --color-success: #03b26c;
+
+  --radius-card: 1rem;
+}

@@ -1,0 +1,5 @@
+import { HomeScreen } from '@/domains/home/components/HomeScreen';
+
+export default function Index() {
+  return <HomeScreen />;
+}

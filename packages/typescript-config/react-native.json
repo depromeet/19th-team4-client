@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Native (Expo)",
+  "//": "expo/tsconfig.base 뒤에 extends 하여 엄격도 옵션만 덧붙입니다. (module/jsx/lib 등은 Expo 설정을 따름)",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true
+  }
+}

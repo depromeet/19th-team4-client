@@ -1,0 +1,27 @@
+# 의존성
+node_modules/
+.pnpm-store/
+
+# 테스트
+coverage/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# 빌드 / 캐시
+*.tsbuildinfo
+.eslintcache
+
+# 환경 변수
+.env*
+!.env.example
+
+# 디버그
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / 에디터
+.DS_Store
+*.pem
+.idea/
