@@ -13,3 +13,5 @@ playwright-report
 test-results
 next-env.d.ts
 expo-env.d.ts
+.agents/skills
+skills-lock.json
