@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@repo/shared": "workspace:*",
+    "@sentry/react-native": "^8.36.0",
     "expo": "~58.0.26",
     "expo-constants": "~58.0.16",
     "expo-linking": "~58.0.17",
