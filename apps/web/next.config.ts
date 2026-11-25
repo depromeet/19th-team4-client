@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { withSentryConfig } from '@sentry/nextjs/config';
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -17,4 +18,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  // 소스맵 업로드 설정: SENTRY_AUTH_TOKEN / SENTRY_ORG / SENTRY_PROJECT 환경변수가 없으면 업로드를 건너뜁니다.
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  // 더 많은 클라이언트 소스맵을 업로드해 스택트레이스 해석 정확도를 높입니다.
+  widenClientFileUpload: true,
+  // 업로드 후 번들에서 소스맵 파일을 제거합니다.
+  sourcemaps: { deleteSourcemapsAfterUpload: true },
+});
