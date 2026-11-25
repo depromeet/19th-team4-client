@@ -85,3 +85,31 @@ pnpm --filter web exec playwright install
 - `react-native-css` RC 는 `lightningcss@1.33` 과 호환되지 않아 `apps/mobile` 에 `lightningcss@1.30.1` 을 고정했습니다. NativeWind 정식 버전이 나오면 고정을 풀어도 되는지 확인해 주세요.
 - `typescript-eslint` 가 TypeScript `<6.1` 까지만, `eslint-plugin-react`·`eslint-plugin-import` 가 ESLint 9 까지만 지원하여 각각 TypeScript 6.0, ESLint 9 를 사용합니다.
 - 앱의 Vitest 는 React Native 컴포넌트를 변환하지 못하므로 순수 로직 테스트에만 사용합니다.
+
+## AI 에이전트 설정
+
+Claude Code, Cursor, Codex CLI, pi 가 같은 스킬·MCP·지침을 쓰도록 구성되어 있습니다.
+
+| 대상 | 원본               | 도구별 연결                                                                                       |
+| ---- | ------------------ | ------------------------------------------------------------------------------------------------- |
+| 지침 | `AGENTS.md`        | `CLAUDE.md` 는 `@AGENTS.md` 로 원본을 불러옵니다.                                                 |
+| 스킬 | `.agents/skills/`  | `.claude/skills/*` 는 원본을 가리키는 심링크입니다. 나머지 도구는 원본을 직접 읽습니다.           |
+| MCP  | `.agents/mcp.json` | `.mcp.json`, `.cursor/mcp.json`, `.pi/mcp.json` 은 심링크이고 `.codex/config.toml` 은 별도입니다. |
+
+처음 사용할 때 도구마다 한 번씩 승인이 필요합니다.
+
+- Claude Code: 실행 후 `.mcp.json` 서버 승인 프롬프트에서 허용합니다.
+- Cursor: 설정의 MCP 목록에서 서버를 켭니다. CLI 는 `cursor-agent mcp enable figma` 를 실행합니다.
+- Codex CLI: 프로젝트를 신뢰해야 `.codex/config.toml` 이 적용됩니다.
+- pi: 프로젝트를 신뢰해야 하며, `.pi/mcp.json` 은 레포 루트에서 실행할 때만 읽힙니다.
+
+스킬은 [`skills` CLI](https://github.com/vercel-labs/skills)로 관리하고 출처와 버전은 `skills-lock.json` 에 기록됩니다.
+
+```bash
+npx skills@1.9.0 add <owner/repo> --skill <name> -a claude-code cursor codex pi -y   # 추가
+npx skills@1.9.0 update --project --yes                                              # 업데이트
+```
+
+`Update agent skills` 워크플로가 매주 업데이트 PR 을 엽니다. 스킬은 에이전트가 그대로 따르는 지시문이므로 변경 내용을 확인한 뒤 머지합니다.
+
+MCP 서버를 추가하거나 바꿀 때는 `.agents/mcp.json` 과 `.codex/config.toml` 을 함께 수정합니다.
